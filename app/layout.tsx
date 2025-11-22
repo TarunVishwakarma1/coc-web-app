@@ -1,15 +1,22 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
+import { ThemeProvider } from "@/components/theme-provider"
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+const clashFont = localFont({
+  src: [
+    {
+      path: "../public/font/Clash_Regular.otf",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../public/font/Clash_Bold.otf",
+      weight: "700", 
+      style: "normal",
+    },
+  ],
+  variable: "--font-clash",
 });
 
 export const metadata: Metadata = {
@@ -23,11 +30,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${clashFont.variable} antialiased`}
       >
+        <ThemeProvider
+        attribute="class"
+        defaultTheme="dark"
+        enableSystem
+        disableTransitionOnChange
+        >
         {children}
+        </ThemeProvider>
       </body>
     </html>
   );
