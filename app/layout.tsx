@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider"
+import NavBar from "@/components/layouts/nav-bar";
 
 const clashFont = localFont({
   src: [
@@ -34,6 +35,7 @@ export default function RootLayout({
         enableSystem
         disableTransitionOnChange
         >
+          <NavBar/>
         {children}
         </ThemeProvider>
       </body>
